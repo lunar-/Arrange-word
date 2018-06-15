@@ -4,7 +4,10 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class ArrangeWord {
+	private static final String REGEX_INTEGER_AND_LOWER_CASE = "^[a-z0-9]*$";
 	private static final Pattern PATTERN = Pattern.compile("^[\\d]*");
 	
 	public String arrangeWord(String word) {
@@ -27,17 +30,21 @@ public class ArrangeWord {
 		// 단어 조합
 		String result = combineWords(integerWord, characterWord);
 		
-		System.out.println("[ result : " + result + " ]");
-		
 		return result;
 	}
 	
 	
 	
 	private String validationWord(String word) {
-		// word 유효성 체크
-		// 영어/숫자만인지
-		// 대소문자, 문장부호, 빈문자, null 체크 등
+		// 빈값 체크
+		if(StringUtils.isBlank(word)) {
+			throw new IllegalArgumentException();
+		}
+		
+		// 소문자, 숫자만인지
+		if(!Pattern.matches(REGEX_INTEGER_AND_LOWER_CASE, word)){
+			throw new IllegalArgumentException();
+		}
 		
 		return word;
 	}
@@ -54,7 +61,6 @@ public class ArrangeWord {
 		int characterWordLength = characterWord.length();
 		
 		// integerWord 과 characterWord 길이가 0인지 체크
-		// 길이가 둘다 0일 때를 배재할 것인지?
 		if(integerWordLength == 0) {
 			return characterWord;
 		}

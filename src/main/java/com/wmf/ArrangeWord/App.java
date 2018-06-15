@@ -8,9 +8,11 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
-        
         ArrangeWord arrange = new ArrangeWord();
-        arrange.arrangeWord("baa019c");
+        
+        String input = "baa019c";
+        String result = arrange.arrangeWord(input);
+        
+        System.out.println("[ result : " + input + " -> " + result + " ]");
     }
 }
